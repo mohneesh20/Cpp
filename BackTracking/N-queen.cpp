@@ -1,81 +1,62 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-vector<vector<bool>> markunSafe(vector<vector<bool>> board,int i,int j,int n){
+vector<vector<int>> result;
+bool isSafe(int **arr,int x,int y,int n){
     for(int k=0;k<n;k++){
-        board[i][k]=false;
-    }
-    for(int k=0;k<n;k++){
-        board[k][j]=false;
-    }
-    int X=j,Y=i;
-    while(Y<n&&X<n){
-        board[Y][X]=false;
-        X++;
-        Y++;
-    }
-    X=j,Y=i;
-    while(Y>=0&&X>=0){
-        board[Y][X]=false;
-        X--;
-        Y--;
-    }
-    X=j,Y=i;
-    while(Y>=0&&X<n){
-        board[Y][X]=false;
-        X++;
-        Y--;
-    }
-    X=j,Y=i;
-    while(Y<n&&X>=0){
-        board[Y][X]=false;
-        X--;
-        Y++;
-    }
-    return board;
-}
-void nQueen(vector<vector<bool>> board,int n,vector<vector<int>> result){
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(result.size()==n){
-                for(auto x:result){
-                    for(auto y:x){
-                        cout<<y<<" ";
-                    }
-                    cout<<endl;
-                }
-                cout<<endl;
-            return;
-            }
-            if(board[i][j]==true){
-                result.push_back({i,j});
-                // cout<<i<<" "<<j<<endl;
-                vector<vector<bool>>board2=markunSafe(board,i,j,n);
-                // for(auto x:board){
-                //     for(auto y:x){
-                //         cout<<y<<" ";
-                //         }
-                //     cout<<endl;
-                // }
-                // cout<<endl;
-                nQueen(board2,n,result);
-            }
+        if(arr[k][y]==1){
+            return false;
         }
     }
+    int X=y,Y=x;
+    while(Y>=0&&X>=0){
+        if(arr[Y][X]==true){
+            return false;
+        }
+        X--;
+        Y--;
+    }
+    X=y,Y=x;
+    while(Y>=0&&X<n){
+        if(arr[Y][X]==true){
+            return false;
+        }
+        X++;
+        Y--;
+    }
+    return true;
 }
+bool nQueen(int **arr,int x,int n){
+    if(x>=n){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cout<<arr[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+        cout<<endl;
+        return true;
+    }
+    for(int col=0;col<n;col++){
+        if(isSafe(arr,x,col,n)){
+            arr[x][col]=1;
+            nQueen(arr,x+1,n);
+            arr[x][col]=0;      
+        }
+    }
+    return false;
+}
+
 int main(){
     int n;
-    cout<<"Enter the size of board:";
+    cout<<"Enter the size of arr:";
     cin>>n;
-    vector<vector<bool>> board(n,vector<bool>(n,true));
-    vector<vector<int>> result;
-    // board=markunSafe(board,0,0,n);
-    // // board=markunSafe(board,1,2,n);
-    // for(auto x:board){
-    //     for(auto y:x){
-    //         cout<<y<<" ";
-    //     }
-    //    cout<<endl;
-    // }
-    nQueen(board,n,result);
+    int **arr=new int*[n];
+    for(int i=0;i<n;i++){
+        arr[i]=new int[n];
+        for(int j=0;j<n;j++){
+            arr[i][j]=0;
+        }
+    }
+    nQueen(arr,0,n);
 }
