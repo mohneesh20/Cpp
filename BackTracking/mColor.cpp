@@ -38,6 +38,7 @@ int main() {
     }
     vector<int> color(n,0);
     if(graphColor(0,graph,color,n,m)){
+        cout<<endl;
         for(auto col:color){
         cout<<col<<" ";
         }
