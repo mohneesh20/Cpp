@@ -47,7 +47,7 @@ int main() {
     vector<vector<int>> c;
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            if(mat[i][j]=='C'){
+            if(mat[i][j]==word[0]){
                 vector<int> tmp;
                 tmp.push_back(i);
                 tmp.push_back(j);
