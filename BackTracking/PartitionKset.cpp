@@ -60,16 +60,18 @@ bool issubset(vector<bool> &visited,vector<int> nums,int curSum,int target,int k
         }
         else{
             visited[i]=true;
-            issubset(visited,nums,curSum+nums[i],target,k,i+1);
+            if(issubset(visited,nums,curSum+nums[i],target,k,i+1)==true){
+                return true;
+            }
             visited[i]=false;
         }
     }
     return false;
 }
 int main(){
-    int n=16;
-    vector<int> nums={3522,181,521,515,304,123,2512,312,922,407,146,1932,4037,2646,3871,269};
-    int k=5;
+    int n=4;
+    vector<int> nums={1,5,11,5};
+    int k=2;
     vector<vector<int>> sets(k);
     int allSum=0;
     for(auto x:nums){
