@@ -25,6 +25,6 @@ int main(){
     // cout<<i<<" "<<j<<" "<<arr3.size();
     // cout<<n<<" "<<m<<" "<<arr3.size();
     for(int k=0;k<arr3.size();k++){
-        cout<<k+1<<":"<<arr3[k]<<"  ";
+        cout<<arr3[k]<<"  ";
     }
 }
