@@ -2,32 +2,38 @@
 #include<vector>
 using namespace std;
 int steps=INT32_MAX;
-bool MinSteps(vector<int> arr,int distance,int counter,int idx){
-    if(idx>=arr.size()){
-        return false;
-    }
-    // cout<<idx<<" ";
-    distance+=arr[idx];
-    cout<<distance<<"-"<<counter<<" ";
-    if(distance>=arr.size()){
-        if(counter<steps){
-            // cout<<counter<<" ";
-            steps=counter;
+int minJumps(vector<int> arr, int n)
+{
+
+    // Base case: when source and
+    // destination are same
+    if (n == 1)
+        return 0;
+
+    // Traverse through all the points
+    // reachable from arr[l]
+    // Recursively, get the minimum number
+    // of jumps needed to reach arr[h] from
+    // these reachable points
+    int res = INT_MAX;
+    for (int i = n - 2; i >= 0; i--) {
+        if (i + arr[i] >= n - 1) {
+            int sub_res = minJumps(arr, i + 1);
+            if (sub_res != INT_MAX)
+                res = min(res, sub_res + 1);
         }
-        return true;
     }
-    for(int i=0;i<arr[idx];i++){
-        MinSteps(arr,distance,counter+1,idx+arr[i]);
-    }
-    return false;
+
+    return res;
 }
 int main(){
-    vector<int> arr={1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
-    MinSteps(arr,0,0,0);
-    if(steps==INT32_MAX){
-        cout<<"NOT POSSIBLE";
-    }
-    else{
-        cout<<endl<<steps;
-    }
+    vector<int> arr={2,1,0,3};
+    cout<<minJumps(arr,arr.size());
+    // MinSteps(arr,0,0,0);
+    // if(steps==INT32_MAX){
+    //     cout<<"NOT POSSIBLE";
+    // }
+    // else{
+    //     cout<<steps;
+    // }
 }

@@ -29,6 +29,12 @@ vector<vector<int>> merge(vector<vector<int>>& intervals) {
         return res;
 }
 int main(){
-    vector<vector<int>> arr;
-    merge(arr);
+    vector<vector<int>> arr={{10,16},{2,8},{1,6},{7,12}};
+    auto ar=merge(arr);
+    for(auto x:ar){
+        for(auto y:x){
+            cout<<y<<" ";
+        }
+        cout<<endl;
+    }
 }
