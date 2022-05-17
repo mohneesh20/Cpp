@@ -41,8 +41,15 @@ int main(){
     tmp=new ListNode(3,tmp);
     tmp=new ListNode(2,tmp);
     tmp=new ListNode(1,tmp);
+    ListNode* tep=tmp;
     // ListNode *temp=rev(tmp);
+    while(tep!=nullptr){
+       cout<<tep->val<<"->";
+       tep=tep->next;
+    }
+    cout<<endl;
     ListNode *temp=comp(tmp);
+    temp=comp(temp);
     // ListNode* temp=tmp;
     while(temp!=nullptr){
         cout<<temp->val<<"->";
