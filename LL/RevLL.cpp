@@ -19,6 +19,16 @@ ListNode* rev(ListNode* head){
     head->next=nullptr;
     return temp;
 }
+ListNode* comp(ListNode* head){
+    ListNode* tmp=head;
+    while(head->next->next!=nullptr){
+        head=head->next;
+    }
+    head->next->next=tmp;
+    tmp=head->next;
+    head->next=nullptr;
+    return tmp;
+}
 int main(){
     ListNode *tmp,*head;
     tmp=new ListNode(10);
@@ -31,7 +41,9 @@ int main(){
     tmp=new ListNode(3,tmp);
     tmp=new ListNode(2,tmp);
     tmp=new ListNode(1,tmp);
-    ListNode *temp=rev(tmp);
+    // ListNode *temp=rev(tmp);
+    ListNode *temp=comp(tmp);
+    // ListNode* temp=tmp;
     while(temp!=nullptr){
         cout<<temp->val<<"->";
         temp=temp->next;
