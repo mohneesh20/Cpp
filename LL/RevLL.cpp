@@ -9,26 +9,22 @@ class ListNode
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-ListNode* rev(ListNode* head){
+ListNode* rev(ListNode* head,int k){
     if(head->next==nullptr){
         return head;
     }
-    ListNode *temp=rev(head->next);
-    // cout<<head->val<<"->";
-    head->next->next=head;
-    head->next=nullptr;
-    return temp;
+    
 }
-ListNode* comp(ListNode* head){
-    ListNode* tmp=head;
-    while(head->next->next!=nullptr){
-        head=head->next;
-    }
-    head->next->next=tmp;
-    tmp=head->next;
-    head->next=nullptr;
-    return tmp;
-}
+// ListNode* comp(ListNode* head){
+//     ListNode* tmp=head;
+//     while(head->next->next!=nullptr){
+//         head=head->next;
+//     }
+//     head->next->next=tmp;
+//     tmp=head->next;
+//     head->next=nullptr;
+//     return tmp;
+// }
 int main(){
     ListNode *tmp,*head;
     tmp=new ListNode(10);
@@ -42,17 +38,7 @@ int main(){
     tmp=new ListNode(2,tmp);
     tmp=new ListNode(1,tmp);
     ListNode* tep=tmp;
-    // ListNode *temp=rev(tmp);
-    while(tep!=nullptr){
-       cout<<tep->val<<"->";
-       tep=tep->next;
-    }
-    cout<<endl;
-    ListNode *temp=comp(tmp);
-    temp=comp(temp);
-    // ListNode* temp=tmp;
-    while(temp!=nullptr){
-        cout<<temp->val<<"->";
-        temp=temp->next;
-    }
+    int k=2;
+    ListNode *temp=rev(tmp,k);
+
 }

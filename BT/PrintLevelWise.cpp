@@ -92,5 +92,5 @@ void printTreeRev(Node *root){
 int main(){
     Node *root=takeLevelInput();
     printTree(root);
-    printTreeRev(root);
+    // printTreeRev(root);
 }
