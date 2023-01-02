@@ -21,5 +21,5 @@ int main(){
             cin>>arr[i][j];
         }
     }
-    divide(0,n-1,0,n-1,arr);
+    // divide(0,n-1,0,n-1,arr);
 }
