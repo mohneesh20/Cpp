@@ -2,32 +2,37 @@
 #include<vector>
 #include<string>
 using namespace std;
-bool isPal(string sub){
-    int l=0,r=sub.size()-1;
+vector<vector<string>> result;
+bool isPal(string str){
+    int l=0,r=str.size()-1;
     while(l<r){
-        if(sub[l]!=sub[r]){
-            return false;
-        }
-        l++;
-        r--;
+        if(str[l++]==str[r--]) continue;
+        else return false;
     }
     return true;
 }
-void partPal(string s,int n,string ans){
-    if(s.size()==0){
-        cout<<ans<<endl;
+void palind(string str,int n,vector<string> tmp){
+    if(str.size()==0){
+        result.push_back(tmp);
         return;
     }
     for(int i=0;i<n;i++){
-        string sub=s.substr(0,i+1);
-        cout<<sub<<" "<<s.substr(i+1)<<endl;
-        // if(isPal(sub)==true){
-        //     partPal(s.substr(i+1),n-1,ans+sub+" ");
-        // }
+        string sub=str.substr(0,i+1);
+        string part2sub=str.substr(i+1);
+        if(isPal(sub)){
+            tmp.push_back(sub);
+            palind(part2sub,part2sub.size(),tmp);
+            tmp.pop_back();
+        }        
     }
 }
 int main(){
-    string str;
-    cin>>str;
-    partPal(str,str.size(),"");
+    string str="abaca";
+    palind(str,str.size(),{});
+    for(auto vec_str:result){
+        for(auto str:vec_str){
+            cout<<str<<" ";
+        }
+        cout<<endl;
+    }
 }
