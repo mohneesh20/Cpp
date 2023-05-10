@@ -1,33 +1,47 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
-bool comp(pair<int,int> a,pair<int,int> b){
-    return a.second>=b.second;
-}
-void Knapsack(vector<pair<int,int>> atr,int maxWeight){
-int bag=0,value=0;
-    if(bag>=maxWeight){
-        return;
+// bool comp(vector<int> &a,vector<int> &b){
+//     return true;
+// }
+// void recur(vector<vector<int>> &arr,int N,int W){
+
+// }
+// int mx=0;
+int BruteForce(int N,int W,vector<int> &v,vector<int> &w,vector<vector<int>> &dp){
+    if(N==0||W==0){
+        return 0;
     }
-    for(auto x:atr){
-        cout<<x.first<<' '<<x.second<<endl;
+    if(dp[N][W]!=-1){
+        return dp[N][W];
     }
-    // Knapsack(atr,W,i)   
+    if(w[N-1]<=W){
+        return dp[N][W]=max(v[N-1]+BruteForce(N-1,W-w[N-1],v,w,dp),BruteForce(N-1,W,v,w,dp));
+    }
+    else{
+        return dp[N][W]=BruteForce(N-1,W,v,w,dp);
+    }
 }
 int main(){
-    int N,W;
-    cout<<"Enter number of items:";
-    cin>>N;
-    vector<pair<int,int>> atr;
-    atr.reserve(N);
-    for(int i=0;i<N;i++){
-        int wt,val;
-        cin>>wt>>val;
-        atr.push_back(make_pair(wt,val));
+    int N=3,W=4;
+    // cin>>N>>W;
+    vector<int> values={1,2,3};
+    vector<int> weight={3,5,1};
+    // vector<vector<int>> arr;
+    // arr.reserve(N);  
+    vector<vector<int>> dp(N+1,vector<int>(W+1,-1));
+    BruteForce(N,W,values,weight,dp);
+    for(auto row:dp){
+        for(auto col:row){
+            cout<<col<<"  ";
+        }
+        cout<<endl;
     }
-    cout<<"Enter max weight:";
-    cin>>W;
-    // sort(atr.begin(),atr.end(),comp);
-    Knapsack(atr,W);
+    // cout<<dp[N][W];
+    // recur(arr,N,W);
+    // sort(arr.begin(),arr.end(),comp);
+    
+
 }

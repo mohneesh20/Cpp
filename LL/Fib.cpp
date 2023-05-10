@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 int Fib(int n){
     if(n==0||n==1){
@@ -12,7 +12,15 @@ int Fib(int n){
 
 }
 int main(){
-    int number;
-    cin>>number;
-    cout<<Fib(number);
+    string str_number;
+    cin>>str_number;
+    int n=str_number.size();
+    int mult=0.1;
+    int number=0;
+    for(int i=0;i<n;i++){
+        number=number*10+(int)(str_number[i]-'0');
+    }
+    cout<<endl<<number;
+    // cout<<((int)(number-'0'));
+    // cout<<Fib(number);
 }

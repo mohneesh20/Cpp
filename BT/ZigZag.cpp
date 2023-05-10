@@ -66,7 +66,6 @@ void ZigZag(Node* root){
     stack<Node*> Layer2;
     Layer1.push(root);
     while(Layer1.size()!=0 || Layer2.size()!=0){
-        // cout<<"Layer1:"<<Layer1.size()<<endl;
         while(Layer1.size()!=0){
             Node *node1=Layer1.top();
             if(node1!=nullptr){
@@ -76,7 +75,6 @@ void ZigZag(Node* root){
             }
             Layer1.pop();
         }
-        // cout<<"Layer2:"<<Layer2.size()<<endl;
         while(Layer2.size()!=0){
             Node *node1=Layer2.top();
             if(node1!=nullptr){
