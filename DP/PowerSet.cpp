@@ -1,19 +1,14 @@
 #include<iostream>
 #include<string>
+#include<bits/stdc++.h>
 using namespace std;
-void printSubsequence(string s){
-    int n=s.size();
-    for(int num=0;num<(1<<n);num++){
-        string sub="";
-        for(int i=0;i<n;i++){
-            if(num&(1<<i)){
-                sub+=s[i];
-            }
-        }
-        cout<<sub<<endl;
-    }
+void permutauions(vector<int>& nums){
+   int n=nums.size();
+   for(int i=0;i<n;i++){
+    
+   }
 }
 int main(){
-    string s="abcd";
-    printSubsequence(s);
+    vector<int> nums={1,2,3};
+    permutauions(nums);
 }
