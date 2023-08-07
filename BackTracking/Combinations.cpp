@@ -1,27 +1,33 @@
-vector<vector<int>> combinations;
-    vector<int> comb;
-    
-    vector<vector<int>> combine(int n, int k) {
-        
-        combinations.clear();
-        comb.clear();
-        comb.resize(k);
-        rec(0, 1, n, k);
-        
-        return combinations;
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>> result;
+void helper(int n,int k,vector<bool>& v,vector<int>& temp,int idx){
+    if(k==0){
+        result.emplace_back(temp);
+        return;
     }
-    
-    void rec(int index, int num, int &numLimit, int &sizeLimit){
-    
-        if( index == sizeLimit ){
-            combinations.push_back(comb);
-            return;
+    for(int i=idx;i<=n;i++){
+        if(v[i]==false){
+            v[i] = true;
+            temp.emplace_back(i);
+            helper(n,k-1,v,temp,i);
+            temp.pop_back();
+            v[i]=false;
         }
-        
-        if( num == numLimit+1 ) return;
-        
-        rec(index, num+1, numLimit, sizeLimit);
-        comb[index] = num;
-        rec(index+1, num+1, numLimit, sizeLimit);
     }
-};
+}
+int main(){
+    int n,k;
+    cin>>n>>k;
+    vector<bool> visit(n+1,false);
+    vector<int> temp;
+    temp.reserve(k);
+    result.reserve(n*k);
+    helper(n,k,visit,temp,1);
+    for(auto &y:result){
+        for(auto &x:y){
+            cout<<x<<" ";
+        }
+        cout<<endl;
+    }
+}
