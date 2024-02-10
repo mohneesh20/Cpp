@@ -63,28 +63,22 @@ void printTree(Node *root){
         cout<<endl;
     }
 }
-int HeightTree(Node *root){
-    int ht=-1,tmp;
-    if(root==nullptr){
-        return ht;
+vector<int> result;
+void LeftView(Node* root,int ht,int &mx){
+    if(root==nullptr) return;
+    if(ht>mx){
+        mx=ht;
+        result.emplace_back(root->data);
     }
-    if(root->left!=nullptr){
-        tmp=HeightTree(root->left);
-        if(tmp>ht){
-            ht=tmp;
-        }
-    }
-    if(root->right!=nullptr){
-        tmp=HeightTree(root->right);
-        if(tmp>ht){
-            ht=tmp;
-        }
-    }
-    return (ht+1);
+    LeftView(root->left,ht+1,mx);
+    LeftView(root->right,ht+1,mx);
 }
 int main(){
     Node *root=takeLevelInput();
-    printTree(root);
-    int ht=HeightTree(root);
-    cout<<"HEIGHT:"<<ht;
+    // printTree(root);
+    int mx=0;
+    LeftView(root,1,mx);
+    for(auto itr:result){
+        cout<<itr<<" ";
+    }
 }
