@@ -1,45 +1,61 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> Union(vector<int> arr1, vector<int> arr2){
-    int i=0;
-    int j=0;
+int main(){
+    vector<int> a={1,2,3,4,6};
+    vector<int> b={2,3,5};
+    int i=0,j=0;
     vector<int> result;
-    while(i!=arr1.size() && j!=arr2.size()){
-        if(arr1[i]==arr2[j]){
-            result.emplace_back(arr1[i]);
-            int tmp = arr1[i];
-            while(arr1[i]==tmp) i++;
-            while(arr2[j]==tmp) j++;
-        }else{
-            result.emplace_back(min(arr1[i],arr2[j]));
-            if(arr1[i]<arr2[j]){
-                int tmp = arr1[i];
-                while(arr1[i]==tmp) i++;
+    int n=a.size();
+    int m=b.size();
+    result.reserve(n+m);
+    while(i!=n&&j!=m){
+        if(a[i]!=b[j]){
+            if(a[i]<b[j]){
+                result.emplace_back(a[i]);
+                int tmp=a[i];
+                while(a[i]==tmp){
+                    i++;
+                    if(i==n) break;
+                }
             }else{
-                int tmp = arr2[j];
-                while(arr2[j]==tmp) j++;
+                result.emplace_back(b[j]);
+                int tmp=b[j];
+                while(b[j]==tmp){
+                    j++;
+                    if(j==m) break;
+                }
+            }
+        }else{
+            int tmp=a[i];
+            result.emplace_back(tmp);
+            while(a[i]==tmp){
+                i++;
+                if(i==n) break;
+            }
+            while(b[j]==tmp){
+                j++;
+                if(j==m) break;
             }
         }
     }
-    while(i!=arr1.size()){
-        int tmp=arr1[i];
+    while(i!=n){
+        int tmp=a[i];
         result.emplace_back(tmp);
-        while(arr1[i]==tmp) i++;
+        while(a[i]==tmp){
+            i++;
+            if(i==n) break;
+        }
     }
-    while(j!=arr2.size()){
-        int tmp=arr1[j];
+    while(j!=m){
+        int tmp=b[j];
         result.emplace_back(tmp);
-        while(arr2[j]==tmp) j++;
+        while(b[j]==tmp){
+            j++;
+            if(j==m) break;
+        }
     }
-    return result;
-}
-int main(){
-    vector<int> arr1={1,2,3,3};
-    vector<int> arr2={2,3,4};
-    vector<int> union_arr=Union(arr1, arr2);
-    cout<<union_arr.size();
-    // for(auto &itr:union_arr){
-    //     cout<<itr<<" ";
-    // }
+    for(auto &itr:result){
+        cout<<itr<<" ";
+    }
 }
