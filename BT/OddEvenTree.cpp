@@ -60,7 +60,7 @@ TreeNode *takeLevelInput(){
     }
     return root;
 }
-bool isOddEvenTree(TreeNode* root){
+bool isEvenOddTree(TreeNode* root){
     if(root->val%2==0) return false;
     queue<TreeNode*> q;
     q.push(root);
@@ -80,15 +80,14 @@ bool isOddEvenTree(TreeNode* root){
                         q.push(lft);
                     }else return false;
                 }
-                cout<<"a"<<endl;
                 if(rgt!=nullptr){
                     if(rgt->val<mx&&rgt->val%2==0){
                         mx=rgt->val;
                         q.push(rgt);
                     }else return false;
                 }
-                cout<<"b"<<endl;
             }
+            flag=true;
         }else{
             int mn=INT32_MIN;
             for(int i=0;i<n;i++){
@@ -102,15 +101,15 @@ bool isOddEvenTree(TreeNode* root){
                         q.push(lft);
                     }else return false;
                 }
-                cout<<"c"<<endl;
+          
                 if(rgt!=nullptr){
                     if(rgt->val>mn&&rgt->val%2!=0){
                         mn=rgt->val;
                         q.push(rgt);
                     }else return false;
                 }
-                cout<<"d"<<endl;
             }
+            flag=false;
         }
     }
     return true;
@@ -118,5 +117,5 @@ bool isOddEvenTree(TreeNode* root){
 int main(){
     TreeNode *root=takeLevelInput();
     printTree(root);
-    cout<<endl<<isOddEvenTree(root)<<endl;  
+    cout<<endl<<isEvenOddTree(root)<<endl;  
 }
