@@ -2,25 +2,27 @@
 #include<vector>
 using namespace std;
 int main(){
-    vector<int> arr={2, 3, 4, 5, -1, 0};
-    int n=arr.size();
-    int cur_pro=1;
-    int max_pro=INT32_MIN;
-    for(int i=0;i<n;i++){
-        cur_pro*=arr[i];
-        max_pro=std::max(cur_pro,max_pro);
-        if(cur_pro==0){
-            cur_pro=1;
+    vector<int> nums={2, 3, 4, 5, -1, 0};
+    int j=1;
+        int mx=INT32_MIN;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0){
+                j=1;
+                mx=max(mx,nums[i]);
+                continue;
+            }
+            j=j*nums[i];
+            mx=max(j,mx);
         }
-    }
-    cur_pro=1;
-    int maxx_pro=INT32_MIN;
-    for(int i=n-1;i>=0;i--){
-        cur_pro*=arr[i];
-        maxx_pro=std::max(cur_pro,maxx_pro);
-        if(cur_pro==0){
-            cur_pro=1;
+        j=1;
+        for(int i=nums.size()-1;i>=0;i--){
+            if(nums[i]==0){
+                j=1;
+                mx=max(mx,nums[i]);
+                continue;
+            }
+            j=j*nums[i];
+            mx=max(j,mx);
         }
-    }
-    cout<<std::max(max_pro,maxx_pro);
+        return mx;
 }
