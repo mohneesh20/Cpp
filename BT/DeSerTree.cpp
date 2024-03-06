@@ -62,7 +62,7 @@ TreeNode *takeLevelInput(){
 }
 string dfs(TreeNode* root){
     if(root==nullptr){
-        return "$";
+        return "";
     }
     string l=dfs(root->left);
     string r=dfs(root->right);
