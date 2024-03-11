@@ -26,13 +26,13 @@ int main(){
     //     v.emplace_back(itr);
     // }
     int l=0,r=v.size()-1;
-    vector<vector<int>> result;
+    set<vector<int>> container;
     while(l<r){
         int sum=v[l]+v[r];
         int target=0-sum;
         int ret=bin_s(v,l+1,r-1,target);
         if(ret!=-1){
-            result.push_back({v[l],v[ret],v[r]});
+            container.insert({v[l],v[ret],v[r]});
             if(sum+v[l+1]>target) r--;
             else l++;
         }else{
@@ -40,11 +40,9 @@ int main(){
             else l++;
         }
     }
-    for(auto &y:result){
-        for(auto &x:y){
-            cout<<x<<" ";
-        }
-        cout<<endl;
+    vector<vector<int>> result;
+    for(auto &y:container){
+        result.push_back(y);
     }
     // for(auto &itr:s){
     //     cout<<itr<<" ";
