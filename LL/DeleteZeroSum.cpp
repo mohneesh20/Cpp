@@ -12,7 +12,7 @@ class UDD{
     int a=-1;
     int b=-1;
 };
-//1 2 -3 3 1 5
+//-3 3 2 2 -3 3
 ListNode* removeZeroSumSublists(ListNode* head) {
     int cnt=0,count=0;
     int prefix=0;
@@ -33,11 +33,21 @@ ListNode* removeZeroSumSublists(ListNode* head) {
         cnt++;
         tmp=tmp->next;        
     }
+    unordered_map<int,int> mp2;
+    for(int i=count;i<cnt;i++){
+        if(mp[i].a!=-1&&mp[i].b!=-1){
+            mp2[mp[i].a]=mp[i].b;
+        }
+    }
+    // for(auto itr=mp2.begin();itr!=mp2.end();itr++){
+    //     cout<<itr->first<<" "<<itr->second<<endl;
+    // }
+    cout<<endl;
     return head2;
 }
 int main(){
     ListNode* head=nullptr,*tmp,*prev=nullptr;
-    int sz=3;
+    int sz=6;
     for(int i=0;i<sz;i++){
         int nde_val;
         cin>>nde_val;
