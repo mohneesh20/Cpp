@@ -39,6 +39,22 @@ ListNode* removeZeroSumSublists(ListNode* head) {
             mp2[mp[i].a]=mp[i].b;
         }
     }
+    tmp=head2;
+    while(tmp->next!=nullptr){
+        int skip=mp2[count];
+        if(skip==0){
+            tmp=tmp->next;
+        }else{
+            ListNode* tmp2=tmp;
+            while(count<=skip){
+                tmp2=tmp2->next;
+                count++;
+            }
+            tmp->next=tmp2->next;
+            count++;
+            tmp=tmp->next;
+        }
+    }
     // for(auto itr=mp2.begin();itr!=mp2.end();itr++){
     //     cout<<itr->first<<" "<<itr->second<<endl;
     // }
