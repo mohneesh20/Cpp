@@ -9,10 +9,10 @@ void mergeSort(int l,int mid,int r,string& s,unordered_map<char,int>& mp){
             temp[k]=s[i];
             i++;
             k++;
-        }else(s[i]>s[j]){
-                temp[k]=s[j];
-                j++;
-                k++;
+        }else{
+            temp[k]=s[j];
+            j++;
+            k++;
         }
     }
     while(i<=mid){
@@ -42,7 +42,7 @@ void merge(int l,int r,string& s,unordered_map<char,int>& mp){
     merge(mid+1,r,s,mp);
     mergeSort(l,mid,r,s,mp);
 }
-string customSortString(string order, string s) {
+string customSortString(string order, string& s) {
         unordered_map<char,int> mp;
         for(int i=0; i<order.size(); i++) {
             mp[order[i]] =i;
