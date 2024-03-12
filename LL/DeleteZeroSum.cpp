@@ -44,22 +44,23 @@ ListNode* removeZeroSumSublists(ListNode* head) {
     // }
     // cout<<count<<endl;
     tmp=head2;
-    // while(tmp->next!=nullptr){
-    //     int skip=mp2[count];
-    //     if(skip==0){
-    //         tmp=tmp->next;
-    //     }else{
-    //         ListNode* tmp2=tmp;
-    //         while(count<=skip){
-    //             tmp2=tmp2->next;
-    //             count++;
-    //         }
-    //         cout<<"TMP:"<<tmp2->val<<endl;
-    //         tmp->next=tmp2->next;
-    //         count++;
-    //         tmp=tmp->next;
-    //     }
-    // }
+    while(tmp->next!=nullptr){
+        int skip=mp2[count];
+        if(skip==0){
+            tmp=tmp->next;
+            count++;
+        }else{
+            ListNode* tmp2=tmp;
+            while(count<skip){
+                tmp2=tmp2->next;
+                count++;
+            }
+            tmp->next=tmp2->next;
+            count++;
+            tmp=tmp->next;
+            return head2;
+        }
+    }
     cout<<endl;
     return head2;
 }
