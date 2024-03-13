@@ -12,11 +12,11 @@ class UDD{
     int a=-1;
     int b=-1;
 };
-//-3 3 2 2 -3 3
+//1 2 -3 3 1
 ListNode* removeZeroSumSublists(ListNode* head) {
     int cnt=0,count=0;
     int prefix=0;
-    ListNode* head2,*tmp;
+    ListNode* head2=head,*tmp;
     tmp=head;
     unordered_map<int,UDD> mp;
     while(tmp!=nullptr){
@@ -33,18 +33,17 @@ ListNode* removeZeroSumSublists(ListNode* head) {
         cnt++;
         tmp=tmp->next;        
     }
+    if(prefix==0) {
+        return nullptr;
+    }
     unordered_map<int,int> mp2;
     for(int i=count;i<cnt;i++){
         if(mp[i].a!=-1&&mp[i].b!=-1){
             mp2[mp[i].a]=mp[i].b;
         }
     }
-    // for(auto itr=mp2.begin();itr!=mp2.end();itr++){
-    //     cout<<itr->first<<" "<<itr->second<<endl;
-    // }
-    // cout<<count<<endl;
     tmp=head2;
-    while(tmp->next!=nullptr){
+    while(tmp&&tmp->next!=nullptr){
         int skip=mp2[count];
         if(skip==0){
             tmp=tmp->next;
@@ -58,15 +57,15 @@ ListNode* removeZeroSumSublists(ListNode* head) {
             tmp->next=tmp2->next;
             count++;
             tmp=tmp->next;
-            return head2;
         }
     }
-    cout<<endl;
+
     return head2;
 }
 int main(){
     ListNode* head=nullptr,*tmp,*prev=nullptr;
-    int sz=6;
+    int sz;
+    cin>>sz;
     for(int i=0;i<sz;i++){
         int nde_val;
         cin>>nde_val;
