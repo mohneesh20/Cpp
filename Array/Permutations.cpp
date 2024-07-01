@@ -13,13 +13,16 @@ void permute(vector<int> &nums,int idx){
     }
 }
 int main(){
-    vector<int> arr={1,3,2};
+    vector<int> arr={1,3,2,4};
     permute(arr,0);
     sort(result.begin(),result.end());
+    int counter=1;
     for(auto &y:result){
+        string str="";
         for(auto &x:y){
-            cout<<x<<" ";
+            str+=to_string(x);
         }
+        cout<<counter++<<":"<<str;
         cout<<endl;
     }
 }
