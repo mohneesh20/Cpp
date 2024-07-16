@@ -1,48 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
-string dfs(int idx,string& s){
-    // int idx=0;
-    // int n=s.size();
-    // string str="";
-    // while(idx<n){
-    //     if(s[i]=='('){
-    //         str+=dfs(i+1,s);
-    //         i+=str.size()+1;
-    //     }else{
-    //         if(s[i]==')') break;
-    //     }else str+=s[i];
-    // }
-    // int l=0,r=str.size()-1;
-    // while(l<r){
-    //     swap(str[l++],str[r--]);
-    // }
-    // return str; 
-    return "evol";
-}
-string reverseParentheses(string s) {
-    int idx=0;
-    int n=s.size();
-    string str="";
-    while(idx<n){
-        if(s[idx]=='('){
-            str+=dfs(idx+1,s);
-            idx+=str.size()+1;
-        }else{
-            if(s[idx]==')') break;
-            else str+=s[idx];
+
+class TreeNode{
+    public:
+    int val;
+    TreeNode *left=nullptr;
+    TreeNode *right=nullptr;
+    TreeNode(int x):val(x){}
+};
+TreeNode *takeLevelInput(){
+    queue<TreeNode*> pendingTreeNodes;
+    int rootval;
+    // cout<<"ENTER ROOT val:";
+    cin>>rootval;
+    // cout<<endl;
+    TreeNode *root=new TreeNode(rootval);
+    pendingTreeNodes.push(root);
+    while(pendingTreeNodes.size()!=0){
+        auto parnt=pendingTreeNodes.front();
+        pendingTreeNodes.pop();
+        int left,right;
+        // cout<<"LEFT:";
+        cin>>left;
+        // cout<<endl;
+        if(left!=-1){
+        TreeNode *leftTreeNode=new TreeNode(left);
+        parnt->left=leftTreeNode;
+        pendingTreeNodes.push(leftTreeNode);
         }
-        idx++;
+        // cout<<"RIGHT:";
+        cin>>right;
+        // cout<<endl;
+        if(right!=-1){
+        TreeNode *rightTreeNode=new TreeNode(right);
+        parnt->right=rightTreeNode;
+        pendingTreeNodes.push(rightTreeNode);
+        }
     }
-    int l=0,r=str.size()-1;
-    while(l<r){
-        swap(str[l++],str[r--]);
-    }
-    cout<<str;
-    return str;
+    return root;
 }
+string getDirections(TreeNode* root, int startValue, int destValue) {
+        
+}
+//1 2 3 -1 -1 -1 -1
 int main(){
-    string s="(u(love)i)";
-    // string s="(ed(et(oc))el)";
-    s=reverseParentheses(s);
-    cout<<endl<<s;
+    TreeNode* root=takeLevelInput();
+    
 }
