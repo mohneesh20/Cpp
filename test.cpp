@@ -45,18 +45,27 @@ struct Node{
     Node* right;
     Node(int x):val(x),parent(nullptr),left(nullptr),right(nullptr){}
 };
-Node* dfs(TreeNode* root,int s,Node* head,Node* parent){
+Node* dfs(TreeNode* root,int s,Node** head,Node* parent){
     if(root==nullptr) return nullptr;
     Node* new_root=new Node(root->val);
     new_root->parent=parent;
     new_root->left=dfs(root->left,s,head,new_root);
     new_root->right=dfs(root->right,s,head,new_root);
+    if(new_root->val==s) *head=new_root;
     return new_root;
 }
 //1 2 3 -1 -1 -1 -1
 int main(){
    TreeNode *root=takeLevelInput();
    Node* head;
-   Node* ret=dfs(root,2,head,nullptr);
-   cout<<ret->left->parent->val;
+   int startValue=2;
+   int destValue=4;
+   Node* ret=dfs(root,startValue,&head,nullptr);
+   queue<pair<Node*,string>> q;
+   q.push(make_pair(head,""));
+   while(q.size()!=0){
+    pair<Node*,string> node=q.front();
+    q.pop();
+    cout<<node.first->val;
+   }
 }
