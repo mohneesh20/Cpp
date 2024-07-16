@@ -58,5 +58,5 @@ int main(){
    TreeNode *root=takeLevelInput();
    Node* head;
    Node* ret=dfs(root,2,head,nullptr);
-   cout<<ret->left->val;
+   cout<<ret->left->parent->val;
 }
