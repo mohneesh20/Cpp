@@ -62,10 +62,27 @@ int main(){
    int destValue=4;
    Node* ret=dfs(root,startValue,&head,nullptr);
    queue<pair<Node*,string>> q;
+   unordered_map<int,bool> visited;
    q.push(make_pair(head,""));
+   visited[head->val]=true;
    while(q.size()!=0){
     pair<Node*,string> node=q.front();
     q.pop();
-    cout<<node.first->val;
+    if(destValue==node.first->val){
+        cout<<node.second<<endl;
+        break;
+    }
+    if(node.first->parent!=nullptr&&visited[node.first->parent->val]==false){
+        q.push(make_pair(node.first->parent,node.second+"U"));
+        visited[node.first->parent->val]=true;
+    }
+    if(node.first->left!=nullptr&&visited[node.first->left->val]==false){
+        q.push(make_pair(node.first->left,node.second+"L"));
+        visited[node.first->left->val]=true;
+    }
+    if(node.first->right!=nullptr&&visited[node.first->right->val]==false){
+        q.push(make_pair(node.first->right,node.second+"R"));
+        visited[node.first->right->val]=true;
+    }
    }
 }
